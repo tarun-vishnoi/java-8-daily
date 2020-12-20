@@ -1,0 +1,29 @@
+Not allowed to do with Generics :
+
+a) You can’t have static field of type
+
+public class GenericsExample<T>
+{
+   private static T member; //This is not allowed
+}
+
+b) You can not create an instance of T
+
+public class GenericsExample<T>
+{
+   public GenericsExample(){
+      new T();
+   }
+}
+
+c) Generics are not compatible with primitives in declarations
+
+final List<int> ids = new ArrayList<>();    //Not allowed
+ 
+final List<Integer> ids = new ArrayList<>(); //Allowed
+
+d) You can’t create Generic exception class
+
+// causes compiler error
+public class GenericException<T> extends Exception {}
+
