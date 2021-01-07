@@ -1,0 +1,36 @@
+
+
+-> If we want to process the objects in collection then we should go for Streams.
+
+-> A group of objects is collection and if we want to process the objects from the collection then Streams comes into the picture.
+
+filter vs map : 
+
+-> If we want to filter elements from the collection based on some boolean condition, then we should go for filtering.
+public Stream filter(Predicate<T> p);
+
+-> If we want to create a separate new object for every object present in the collection based on some function then we should go 
+for mapping mechanism.
+public Stream map(Function<T, R> f); 
+
+-> collect() : collects the elements from the stream and adding to the specified Collection.
+
+-> count() :  returns the number of elements present in Stream.
+
+-> sorted() : to sort elements inside Stream {Overloaded method sorted(Comparator c) for customized sorting.}
+
+-> toArray() : to copy elements present in the Stream into specified array.
+Integer[] array = list.stream().toArray(Integer[]::new);
+for(Integer i : array){
+	SYSOUT(i);
+}
+
+-> of() : We can also apply Stream for group of values and for array. 
+
+1). for group of values
+Stream<Integer> s = Stream.of(1,34,56,32,78,23);
+s.forEach(System.out::println);
+
+2). Double[] d = {100, 51561, 65161, 56161, 454};
+Stream<Double> s1 = Stream.of(d);
+s1.forEach(System.out::println);

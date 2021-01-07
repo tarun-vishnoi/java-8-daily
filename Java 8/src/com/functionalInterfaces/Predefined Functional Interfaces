@@ -1,0 +1,243 @@
+
+
+Available @ java.util.function
+
+
+=================================Predicate============================================
+
+-> To take some input and perform some conditional checks.
+
+-> Contains only one abstract method named test() with boolean return type.
+
+interface Predicate<T>{
+	boolean test(T t);
+}
+-> negate() : !test(T t) 
+-> and(Predicate p), or(Predicate p) : Predicate joining.
+-> isEqual(T t) : static method,  Returns a predicate that tests if two arguments are equal according.
+
+Example : 
+Predicate<EMployee> p = Predicate.isEqual(new Employee("Alex", "SDE", "Java"));
+Employee e1 = Employee("Alex", "SDE", "Java");
+Employee e2 = new Employee("Bob", "SDE 2", "Python");
+SYSOUT(p.test(e1)); // true
+SYSOUT(p.test(e2)); // false
+
+Note : To make isEqual works we need to override object class's equals(Object obj) method.
+
+TO IMPLEMENT CONDITIONAL CEHCKS, WE SHOULD GO FOR PREDICATE.
+
+default methods : negate(), and(), or()
+static methods : isEqual()
+
+
+
+
+================================BiPredicate===========================================
+
+-> To take two inputs and perform some conditional checks.
+
+interface BiPredicate<T, U>{
+	boolean test(T t, U u);
+}
+
+
+
+
+================================Function==============================================
+
+-> To take some input and perform required operation and return the result.
+-> It can return any type of value. 
+
+interface Function<T, R>{
+	R apply(T t);
+}
+where T is input parameter and R is return type.
+
+-> f1.andThen(f2) : f1 will be applied followed by f2
+-> f1.compose(f2) : f2 will be applied followed by f1
+-> identity() : static method, a function that always returns its input argument
+
+TO PERFORM CERTAIN OPERATION AND TO RETURN SOME RESULT WE SHOULD GO FOR FUNCTION.
+
+default methods : andThen(), compose()
+static methods : identity()
+
+
+
+
+================================BiFunction============================================
+
+-> To take two inputs and perform required operation and return the result.
+
+interface BiFunction<T, U, R>{
+	R apply(T t, U u);
+}
+
+
+
+
+================================Consumer==============================================
+
+-> To consume some input and perform required operation. It won't return anything.
+-> accepts a single input argument and returns no result.
+
+interface Consumer<T>{
+	void accept(T t); // won't return anything
+}
+
+-> c1.andThen(c2) : c1 will be applied followed by c2
+
+default methods : andThen()
+static methods :  NA
+
+
+
+
+================================BiConsumer============================================
+
+-> To consume two inputs and perform required operation. It won't return anything.
+
+interface BiConsumer<T, U>{
+	void accept(T t, U u); // won't return anything
+}
+
+
+
+
+================================Supplier==============================================
+
+-> To supply some value based on requirement. 
+-> Represents a supplier of results.
+-> won't take any input but always return something.
+
+interface Supplier<R>{
+	R get(); // only method 
+}
+where R is return type
+
+default methods : NA
+static methods :  NA
+
+
+
+
+
+====================Primitive Type Functional Interfaces===============================
+
+-> Needed because Auto-boxing and Auto-unboxing will happen behind the scene. 
+
+int[] x = {1,2,5,8,9};
+Predicate<Integer> p = i-> i%2==0; // Auto-boxing and Auto-unboxing 
+
+-> In the case of normal Functional interfaces (like Predicate, Function etc) input and return types are
+always Object types. If we pass primitive values then these primitive values will be converted to Object 
+type (Auto-boxing), which creates performance problems.
+
+-----------------------------------------------------
+
+-> Predicate Interface 
+
+-> We can use IntPredicate, LongPredicate, DoublePredicate interface.
+
+interface IntPredicate{
+	boolean test(int i);
+}
+
+-----------------------------------------------------
+
+All 15 Primitive Type Function Functional Interface : 
+
+-> Control over input type
+1). interface IntFunction<R>{ public R apply(int i) }
+2). interface LongFunction<R>{ public R apply(long i) }
+3). interface DoubleFunction<R>{ public R apply(double i) }
+
+-> Control over return type
+4). interface ToIntFunction<T>{ public int applyAsInt(T t) }
+5). interface ToLongFunction<T>{ public long applyAsLong(T t) }
+6). interface ToDoubleFunction<T>{ public double applyAsDouble(T t) }
+
+-> Control on both input type and return type
+7). interface IntToLongFunction{ public long applyAsLong(int i) }
+8).	interface IntToDoubleFunction{ public double applyAsDouble(int i) }
+9). interface LongToIntFunction{ public int applyAsInt(long i) }
+10). interface LongToDoubleFunction{ public double applyAsDouble(long i) }
+11). interface DoubleToIntFunction{ public int applyAsInt(double i) }
+12). interface DoubleToLongFunction{ public long applyAsLong(double i) }
+
+-> BiFunction
+13). interface ToIntBIFunction<T, U>{ public int applyAsInt(T t, U u) }
+14). interface ToLongBiFunction<T, U>{ public long applyAsLong(T t, U u) }
+15). interface ToDoubleBiFunction<T, U>{ public double applyAsDouble(T t, U u) }
+
+Note : Internal Auto-boxing and Auto-unboxing will not going to performed if we use above interfaces.
+
+--------------------------------------------------------
+
+-> Consumer Interface : 
+
+Primitive -> IntConsumer, LongConsumer, DoubleConsumer
+
+interface IntConsumer{
+	void accept(int i)
+}
+
+Complex -> ObjIntConsumer, ObjLongConsumer, ObjDoubleConsumer
+
+interface ObjIntConsumer<T>{
+	void accept(T t, int i);
+}
+
+--------------------------------------------------------
+
+-> Supplier Interface 
+
+IntSupplier, LongSupplier, DoubleSupplier, BooleanSupplier
+
+interface IntSupplier{
+	int getAsInt();
+}
+
+
+
+
+
+==============================UnaryOperator============================================
+
+-> If input type and return type are same then we can go for UnaryOperator instead of Function
+
+interface UnaryOperator<T>{
+	T apply(T t)
+}
+
+-> IntUnaryOperator, LongUnaryOperator, DoubleUnaryOperator
+
+interface IntUnaryOperator{ // return type always int
+	int applyAsInt(int i);
+}
+
+
+
+
+=============================BinaryOperator============================================
+
+-> If both input types and return type are same then we can go for UnaryOperator instead of BiFunction
+
+interface BinaryOperator<T>{
+	T apply(t t1, T t2);
+}
+
+-> IntBinaryOperator, LongBinaryOperator, DoubleBinaryOperator
+
+interface IntBinaryOperator{ // return type always int
+	int applyAsInt(int i1, int i2);
+}
+
+
+====================Primitive Type Functional Interfaces===============================
+
+
+
+
+

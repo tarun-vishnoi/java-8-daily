@@ -1,0 +1,30 @@
+Lambda Expression : It is an anonymous function.
+
+-> not having name
+-> not having modifiers 
+-> not having any return type
+
+Note : Usually we can specify the type of parameters. If compiler expect the type based on context, then we can remove type [Type Inference].
+Note : If lambda expression returns something then we can remove return keyword {s->s.length()}.
+
+Functional Interface :
+
+-> If an interface extends functional interface and child interface does not contain any abstract method then child interface is always
+functional interface.
+-> In the child interface we can define exactly same parent interface abstract method.
+-> In the child interface we can't define any new abstract method otherwise we will get compilation error.
+
+
+Anonymous class vs Lambda Expression:
+-> Anonymous Inner class can implements an interface that contains any number of abstract methods but Lambda expression can implement 
+an interface which contains single abstract method.
+-> Inside Anonymous Inner class we can declare instance variables but Inside Lambda expression we can't declare instance variables 
+whatever variables declared are considered as local variables.
+-> Anonymous Inner class can be instantiated but Lambda expression can't be.
+-> Inside Anonymous Inner class, this always refers current anonymous inner class object, not outer class object but Inside Lambda 
+expression current outer class object ie. enclosing class object.
+-> In case of anonymous inner class at the time of compilation a separate .class file will be generated whereas In case of Lambda expression 
+no .class file will be generated.
+
+
+Note : Local variable referenced from Lambda expression must be final or effectively final. 

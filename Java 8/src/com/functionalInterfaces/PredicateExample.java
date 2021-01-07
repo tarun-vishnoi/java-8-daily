@@ -19,6 +19,7 @@ public class PredicateExample {
 		Predicate<Integer> predicate = (i) -> {
 			return i % 2 == 0;
 		};
+
 		System.out.println(predicate.test(10));
 
 		Predicate<Integer> predicate1 = (i) -> i % 5 == 0; // applicable only for a single line instruction.

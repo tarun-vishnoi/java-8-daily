@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * To define our own sorting (Customized sorting)
+ * 
+ * @author Tarun Vishnoi
+ *
+ */
 public class ComparatorLambda {
 
 	public static void main(String[] args) {
@@ -16,19 +22,16 @@ public class ComparatorLambda {
 		employees.add(emp2);
 		employees.add(emp3);
 
-		Collections.sort(employees, (o1, o2) -> {
-			return o1.getName().compareTo(o2.getName());
-		});
+		Collections.sort(employees, (o1, o2) -> o1.getName().compareTo(o2.getName()));
 		System.out.println("Sort by Name" + employees.toString());
 
+		// If lambda expression returns something then we can remove return keyword.
 		Collections.sort(employees, (o1, o2) -> {
 			return o1.getAge() - o2.getAge();
 		});
 		System.out.println("Sort by Age" + employees.toString());
 
-		Collections.sort(employees, (o1, o2) -> {
-			return o1.getCity().compareTo(o2.getCity());
-		});
+		Collections.sort(employees, (o1, o2) -> o1.getCity().compareTo(o2.getCity()));
 		System.out.println("Sort by City" + employees.toString());
 	}
 

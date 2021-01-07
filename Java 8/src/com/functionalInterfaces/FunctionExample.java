@@ -25,6 +25,9 @@ public class FunctionExample {
 		Function<String, String> function = (name) -> name.toLowerCase();
 		System.out.println(function.apply("This message came from Saturn."));
 
+		Function<String, Integer> spaceCount = str -> str.length() - str.replaceAll(" ", "").length();
+		System.out.println(spaceCount.apply("This message cam from MARS. "));
+
 		Function<String, String> function1 = (name) -> name.toUpperCase().concat(" and Mars");
 		System.out.println(function.andThen(function1).apply("This message came from Saturn"));
 
